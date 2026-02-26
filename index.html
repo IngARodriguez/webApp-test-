@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- PWA / iOS specific -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FileVault">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0f172a">
+
+    <!-- SEO -->
+    <title>FileVault — Gestor de Archivos</title>
+    <meta name="description"
+        content="Tu gestor de archivos personal. Guarda, organiza y previsualiza archivos directamente en tu dispositivo.">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ── App Shell ──────────────────────────────────────────────── -->
+    <div id="app">
+
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <div class="sidebar-logo">
+                <img src="icons/icon-192.png" alt="FileVault" class="logo-icon">
+                <span class="logo-text">FileVault</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="nav-item active" href="#" id="navMyFiles">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M3 7a2 2 0 012-2h4.586a1 1 0 01.707.293l1.414 1.414A1 1 0 0012.414 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"
+                            fill="currentColor" />
+                    </svg>
+                    Mis Archivos
+                </a>
+            </nav>
+            <div class="sidebar-bottom">
+                <button class="sidebar-theme-btn" id="btnTheme" aria-label="Cambiar tema">☀️</button>
+            </div>
+        </aside>
+
+        <!-- Main area -->
+        <div id="mainContent">
+
+            <!-- Top bar -->
+            <header id="topBar">
+                <div class="topbar-left">
+                    <button class="hamburger" id="btnHamburger" aria-label="Menú">
+                        <span></span><span></span><span></span>
+                    </button>
+                    <nav id="breadcrumb" aria-label="Ruta"></nav>
+                </div>
+                <div class="topbar-search">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Buscar archivos..." autocomplete="off"
+                        spellcheck="false">
+                </div>
+                <div class="topbar-right">
+                    <button class="icon-btn" id="btnGrid" aria-label="Vista cuadrícula" title="Cuadrícula">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7" rx="1" />
+                            <rect x="14" y="3" width="7" height="7" rx="1" />
+                            <rect x="3" y="14" width="7" height="7" rx="1" />
+                            <rect x="14" y="14" width="7" height="7" rx="1" />
+                        </svg>
+                    </button>
+                    <button class="icon-btn" id="btnList" aria-label="Vista lista" title="Lista">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="8" y1="6" x2="21" y2="6" />
+                            <line x1="8" y1="12" x2="21" y2="12" />
+                            <line x1="8" y1="18" x2="21" y2="18" />
+                            <line x1="3" y1="6" x2="3.01" y2="6" />
+                            <line x1="3" y1="12" x2="3.01" y2="12" />
+                            <line x1="3" y1="18" x2="3.01" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Action bar -->
+            <div id="actionBar">
+                <div class="action-buttons">
+                    <button class="action-btn primary" id="btnUpload">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                        </svg>
+                        Subir archivos
+                    </button>
+                    <button class="action-btn" id="btnNewFolder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 10.5v6m3-3H9m4.06-7.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+                        </svg>
+                        Nueva carpeta
+                    </button>
+                </div>
+                <div class="sort-controls">
+                    <span class="sort-label">Ordenar:</span>
+                    <button class="sort-btn active" data-sort="name">Nombre<span class="sort-arrow"> ↑</span></button>
+                    <button class="sort-btn" data-sort="date">Fecha</button>
+                    <button class="sort-btn" data-sort="size">Tamaño</button>
+                </div>
+            </div>
+
+            <!-- Drop hint -->
+            <div class="drop-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+                <span>Suelta los archivos aquí para subirlos</span>
+            </div>
+
+            <!-- Files container -->
+            <main id="fileContainer" class="file-grid"></main>
+
+        </div>
+    </div>
+
+    <!-- Sidebar overlay (mobile) -->
+    <div id="sidebarOverlay"></div>
+
+    <!-- Hidden file input -->
+    <input type="file" id="fileInput" multiple hidden>
+
+    <!-- Context menu -->
+    <div id="contextMenu" role="menu"></div>
+
+    <!-- Dialog overlay -->
+    <div id="dialogOverlay">
+        <div class="dialog-box" role="dialog" aria-modal="true">
+            <div class="dialog-header">
+                <h2 id="dialogTitle"></h2>
+                <button class="dialog-close-btn" id="dialogClose" aria-label="Cerrar">✕</button>
+            </div>
+            <div id="dialogContent"></div>
+            <div id="dialogButtons" class="dialog-footer"></div>
+        </div>
+    </div>
+
+    <!-- Preview modal -->
+    <div id="previewModal" role="dialog" aria-modal="true">
+        <div class="preview-box">
+            <div class="preview-header">
+                <h2 id="previewTitle"></h2>
+                <div class="preview-header-actions">
+                    <button id="previewDownload" class="preview-action-btn" aria-label="Descargar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M7.5 7.5l4.5 4.5 4.5-4.5M12 3v13.5" />
+                        </svg>
+                    </button>
+                    <button id="previewClose" class="preview-action-btn" aria-label="Cerrar">✕</button>
+                </div>
+            </div>
+            <div id="previewBody" class="preview-body"></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
